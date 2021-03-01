@@ -1,12 +1,10 @@
-package controllers
+package com.ceiba.controllers
 
 import actions.AuthAction
-import model.Persona
-import play.api.libs.functional.syntax.{toApplicativeOps, toFunctionalBuilderOps, unlift}
-import play.api.libs.json.Reads.minLength
-import play.api.libs.json.{JsError, JsPath, Json, Reads, Writes}
-import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request, Result}
-import repositories.PersonaRepository
+import com.ceiba.models.Persona
+import com.ceiba.repositories.PersonaRepository
+import play.api.libs.json.{JsError, Json, Reads}
+import play.api.mvc._
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global

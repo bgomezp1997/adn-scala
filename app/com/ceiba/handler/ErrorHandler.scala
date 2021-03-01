@@ -1,4 +1,4 @@
-package handler
+package com.ceiba.handler
 
 import play.api.http.HttpErrorHandler
 import play.api.mvc.RequestHeader

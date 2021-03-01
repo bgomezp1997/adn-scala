@@ -10,15 +10,15 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
-GET     /persona                    controllers.PersonaController.listPersonasInMemory
+GET     /persona                    com.ceiba.controllers.PersonaController.listPersonasInMemory
 
-POST    /persona                    controllers.PersonaController.savePersonaConciseInMemory
+POST    /persona                    com.ceiba.controllers.PersonaController.savePersonaConciseInMemory
 
-GET     /personaDB                  controllers.PersonaController.listPersonasInDB()
+GET     /personaDB                  com.ceiba.controllers.PersonaController.listPersonasInDB()
 
-GET     /personaDB/:limit           controllers.PersonaController.lowerAgeInDB(limit: Int)
+GET     /personaDB/:limit           com.ceiba.controllers.PersonaController.lowerAgeInDB(limit: Int)
 
-POST    /personaDB                  controllers.PersonaController.addInDB()
+POST    /personaDB                  com.ceiba.controllers.PersonaController.addInDB()
 
 POST    /file                       controllers.FileController.upload
 

@@ -1,4 +1,4 @@
-package model
+package com.ceiba.models
 
 import play.api.libs.functional.syntax.{toApplicativeOps, toFunctionalBuilderOps, unlift}
 import play.api.libs.json.Reads.minLength

@@ -1,6 +1,6 @@
-package repositories
+package com.ceiba.repositories
 
-import model.Persona
+import com.ceiba.models.Persona
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 

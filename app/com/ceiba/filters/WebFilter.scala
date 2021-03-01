@@ -1,11 +1,10 @@
-package filters
+package com.ceiba.filters
 
 import akka.stream.Materializer
 import play.api.mvc.Results.Forbidden
-
-import javax.inject._
 import play.api.mvc._
 
+import javax.inject._
 import scala.concurrent.{ExecutionContext, Future}
 
 /**
@@ -19,7 +18,7 @@ import scala.concurrent.{ExecutionContext, Future}
  *             It is used below by the `map` method.
  */
 @Singleton
-class ExampleFilter @Inject()(implicit override val mat: Materializer, exec: ExecutionContext) extends Filter {
+class WebFilter @Inject()(implicit override val mat: Materializer, exec: ExecutionContext) extends Filter {
 
   override def apply(nextFilter: RequestHeader => Future[Result])
                     (requestHeader: RequestHeader): Future[Result] = {
