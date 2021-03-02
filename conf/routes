@@ -9,6 +9,10 @@ GET     /patient                  com.ceiba.controllers.PatientController.list()
 
 POST    /patient                  com.ceiba.controllers.PatientController.add()
 
+GET     /eps                      com.ceiba.controllers.EpsController.list()
+
+POST    /eps                      com.ceiba.controllers.EpsController.add()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
