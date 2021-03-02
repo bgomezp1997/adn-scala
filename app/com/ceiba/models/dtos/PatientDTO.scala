@@ -1,9 +1,9 @@
 package com.ceiba.models.dtos
 
 import com.ceiba.models.entities.Patient
-import play.api.libs.functional.syntax.{toApplicativeOps, toFunctionalBuilderOps, unlift}
+import play.api.libs.functional.syntax.{toApplicativeOps, toFunctionalBuilderOps}
 import play.api.libs.json.Reads.minLength
-import play.api.libs.json.{JsPath, Reads, Writes}
+import play.api.libs.json.{JsPath, Reads}
 
 import java.time.LocalDate
 
@@ -12,12 +12,12 @@ case class PatientDTO(identification: Long, name: String, lastName: String, crea
 object PatientDTO {
 
   implicit def patientToPatientDTO(patient: Patient) = PatientDTO(patient.identification,
-                                                                  patient.name,
-                                                                  patient.lastName,
-                                                                  patient.creationDate,
-                                                                  patient.email,
-                                                                  patient.nitEps,
-                                                                  patient.stratum)
+    patient.name,
+    patient.lastName,
+    patient.creationDate,
+    patient.email,
+    patient.nitEps,
+    patient.stratum)
 
   implicit val patientReads: Reads[PatientDTO] =
     (JsPath \ "identification").read[Long]

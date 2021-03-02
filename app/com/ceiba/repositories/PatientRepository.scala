@@ -1,6 +1,5 @@
 package com.ceiba.repositories
 
-import com.ceiba.models.dtos.PatientDTO
 import com.ceiba.models.entities.Patient
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
@@ -27,7 +26,7 @@ class PatientRepository @Inject()(protected val dbConfigProvider: DatabaseConfig
 
     implicit val localDateColumnType = MappedColumnType.base[LocalDate, Date](Date.valueOf, _.toLocalDate)
 
-    def identification = column[Long]("identification", O.PrimaryKey)
+    def identification = column[Long]("identification", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
     def lastName = column[String]("last_name")
     def creationDate = column[LocalDate]("creation_date")

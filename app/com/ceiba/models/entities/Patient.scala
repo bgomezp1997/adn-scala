@@ -12,12 +12,12 @@ case class Patient(identification: Long, name: String, lastName: String, creatio
 object Patient {
 
   implicit def patientDTOToPatient(patientDTO: PatientDTO) = Patient(patientDTO.identification,
-                                                                      patientDTO.name,
-                                                                      patientDTO.lastName,
-                                                                      patientDTO.creationDate,
-                                                                      patientDTO.email,
-                                                                      patientDTO.nitEps,
-                                                                      patientDTO.stratum)
+    patientDTO.name,
+    patientDTO.lastName,
+    patientDTO.creationDate,
+    patientDTO.email,
+    patientDTO.nitEps,
+    patientDTO.stratum)
 
   implicit val patientWrites: Writes[Patient] =
     (JsPath \ "identification").write[Long]
