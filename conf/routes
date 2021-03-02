@@ -3,24 +3,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+GET     /patient/:limit           com.ceiba.controllers.PatientController.lowerStratum(limit: Int)
 
-GET     /persona                    com.ceiba.controllers.PersonaController.listPersonasInMemory
+GET     /patient                  com.ceiba.controllers.PatientController.list()
 
-POST    /persona                    com.ceiba.controllers.PersonaController.savePersonaConciseInMemory
+POST    /patient                  com.ceiba.controllers.PatientController.add()
 
-GET     /personaDB                  com.ceiba.controllers.PersonaController.listPersonasInDB()
-
-GET     /personaDB/:limit           com.ceiba.controllers.PersonaController.lowerAgeInDB(limit: Int)
-
-POST    /personaDB                  com.ceiba.controllers.PersonaController.addInDB()
-
-POST    /file                       controllers.FileController.upload
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
