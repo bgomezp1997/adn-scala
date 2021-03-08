@@ -1,8 +1,13 @@
 package com.ceiba.controllers
 
-import actions.AuthAction
-import com.ceiba.models.dtos.PatientDTO
-import com.ceiba.services.PatientService
+import com.ceiba.controllers.formatter.FormatterController
+import com.ceiba.driver.command.PatientCommand
+import com.ceiba.driver.command.patient.{CreatePatientDriver, DeletePatientDriver, UpgradePatientDriver}
+import com.ceiba.driver.consult.{ConsultPatientDriver, ListPatientDriver}
+import com.ceiba.util.ActionController._
+import com.ceiba.model.dto.PatientDTO
+import com.ceiba.service.PatientService
+import io.swagger.annotations.{Api, ApiOperation}
 import play.api.libs.json.Json
 import play.api.mvc._
 
@@ -10,28 +15,37 @@ import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class PatientController @Inject()(authAction: AuthAction, cc: ControllerComponents, patientService: PatientService) extends AbstractController(cc) {
+@Api(value = "/patient", tags = Array("Controlador de pacientes"))
+class PatientController @Inject()(cc: ControllerComponents,
+                                  createPatientDriver: CreatePatientDriver,
+                                  deletePatientDriver: DeletePatientDriver,
+                                  upgradePatientDriver: UpgradePatientDriver,
+                                  listPatientDriver: ListPatientDriver,
+                                  consultPatientDriver: ConsultPatientDriver) extends AbstractController(cc) with FormatterController {
 
-  def list() = Action.async {
-    implicit request: Request[AnyContent] =>
-      patientService.getAllPatients().map(s => Ok(Json.toJson(s)))
+  @ApiOperation("Crear paciente")
+  def create() = Action.async(parse.json[PatientCommand]) { implicit request: Request[PatientCommand] =>
+    createPatientDriver.execute(request.body)
   }
 
-  def lowerStratum(stratum: Int) = Action.async {
-    implicit request: Request[AnyContent] =>
-      patientService.getByStratum(stratum).map(s => Ok(Json.toJson(s)))
+  @ApiOperation("Eliminar paciente")
+  def delete(id: Long) = Action.async { implicit request: Request[AnyContent] =>
+    deletePatientDriver.execute(id)
   }
 
-  def add() = Action.async(parse.json[PatientDTO]) { request =>
-    insertPatient(request.body)
+  @ApiOperation("Actualizar paciente")
+  def upgrade() = Action.async(parse.json[PatientCommand]) { implicit request: Request[PatientCommand] =>
+    upgradePatientDriver.execute(request.body)
   }
 
-  private def insertPatient(patientDTO: PatientDTO): Future[Result] = {
-    patientService.save(patientDTO)
-      .map(_ => Ok("The patient was successfully saved"))
-      .recoverWith {
-        case _: Exception => Future.successful(InternalServerError("The record could not be saved"))
-      }
+  @ApiOperation("Listar todos los pacientes")
+  def list() = Action.async { implicit request: Request[AnyContent] =>
+    listPatientDriver.execute()
+  }
+
+  @ApiOperation("Bucar paciente por identificacion")
+  def consult(id: Long) = Action.async { implicit request: Request[AnyContent] =>
+    consultPatientDriver.execute(id)
   }
 
 }

@@ -1,7 +1,7 @@
 package com.ceiba.controllers
 
-import com.ceiba.models.dtos.{DateDTO, EpsDTO}
-import com.ceiba.services.{DateService, EpsService}
+import com.ceiba.model.dto.{DateDTO, EpsDTO}
+import com.ceiba.service.{DateService, EpsService}
 import play.api.libs.json.Json
 import play.api.mvc._
 

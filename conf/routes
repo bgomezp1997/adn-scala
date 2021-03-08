@@ -3,15 +3,13 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /patient/:limit           com.ceiba.controllers.PatientController.lowerStratum(limit: Int)
+GET     /patient                      com.ceiba.controllers.PatientController.list()
+GET     /patient/:id                  com.ceiba.controllers.PatientController.consult(id:Long)
+POST    /patient                      com.ceiba.controllers.PatientController.create()
+PUT     /patient                      com.ceiba.controllers.PatientController.upgrade()
+DELETE  /patient/:id                  com.ceiba.controllers.PatientController.delete(id:Long)
 
-GET     /patient                  com.ceiba.controllers.PatientController.list()
-
-POST    /patient                  com.ceiba.controllers.PatientController.add()
-
-GET     /eps                      com.ceiba.controllers.EpsController.list()
-
-POST    /eps                      com.ceiba.controllers.EpsController.add()
+GET     /swagger.json                 controllers.ApiHelpController.getResources
 
 
 # Map static resources from the /public folder to the /assets URL path

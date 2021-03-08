@@ -1,8 +1,9 @@
-import com.ceiba.services.PatientService
+import com.ceiba.domain.persistence.dao.PatientDAO
+import com.ceiba.domain.persistence.repository.PatientRepository
+import com.ceiba.persistence.dao.PatientDAOImpl
+import com.ceiba.persistence.repository.PatientRepositoryImpl
+import com.ceiba.service.PatientService
 import com.google.inject.AbstractModule
-
-import java.time.Clock
-import services.{ApplicationTimer, AtomicCounter, Counter}
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -17,7 +18,8 @@ import services.{ApplicationTimer, AtomicCounter, Counter}
 class Module extends AbstractModule {
 
   override def configure() = {
-    bind(classOf[PatientService]).asEagerSingleton()
+    bind(classOf[PatientRepository]).to(classOf[PatientRepositoryImpl]).asEagerSingleton()
+    bind(classOf[PatientDAO]).to(classOf[PatientDAOImpl]).asEagerSingleton()
   }
 
 }

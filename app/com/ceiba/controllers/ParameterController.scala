@@ -1,7 +1,7 @@
 package com.ceiba.controllers
 
-import com.ceiba.models.dtos.{EpsDTO, ParameterDTO}
-import com.ceiba.services.{EpsService, ParameterService}
+import com.ceiba.model.dto.{EpsDTO, ParameterDTO}
+import com.ceiba.service.{EpsService, ParameterService}
 import play.api.libs.json.Json
 import play.api.mvc._
 
@@ -13,7 +13,7 @@ class ParameterController @Inject()(cc: ControllerComponents, parameterService: 
 
   def list() = Action.async {
     implicit request: Request[AnyContent] =>
-      parameterService.getAllParamters().map(s => Ok(Json.toJson(s)))
+      parameterService.getAllParameters().map(s => Ok(Json.toJson(s)))
   }
 
   def add() = Action.async(parse.json[ParameterDTO]) { request =>

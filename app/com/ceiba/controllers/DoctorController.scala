@@ -1,8 +1,7 @@
 package com.ceiba.controllers
 
-import actions.AuthAction
-import com.ceiba.models.dtos.{DateDTO, DoctorDTO}
-import com.ceiba.services.{DateService, DoctorService}
+import com.ceiba.model.dto.{DateDTO, DoctorDTO}
+import com.ceiba.service.{DateService, DoctorService}
 import play.api.libs.json.Json
 import play.api.mvc._
 
