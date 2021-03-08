@@ -1,7 +1,7 @@
 package com.ceiba.domain.persistence.dao
 
-import com.ceiba.model.dto.PatientDTO
-import com.ceiba.model.entity.Patient.IdPatient
+import com.ceiba.domain.model.dto.PatientDTO
+import com.ceiba.domain.model.entity.Patient.IdPatient
 import com.ceiba.domain.Result.Response
 import monix.eval.Task
 

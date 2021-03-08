@@ -1,8 +1,8 @@
 import com.ceiba.domain.persistence.dao.PatientDAO
 import com.ceiba.domain.persistence.repository.PatientRepository
-import com.ceiba.persistence.dao.PatientDAOImpl
-import com.ceiba.persistence.repository.PatientRepositoryImpl
-import com.ceiba.service.PatientService
+import com.ceiba.infra.persistence.dao.PatientDAOImpl
+import com.ceiba.infra.persistence.repository.PatientRepositoryImpl
+import com.ceiba.domain.service.PatientService
 import com.google.inject.AbstractModule
 
 /**
