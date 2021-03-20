@@ -34,6 +34,8 @@
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
 
   <logger name="slick.jdbc.JdbcBackend.statement"  level="DEBUG" />
+  <logger name="slick" level="INFO" />
+  <logger name="slick.jdbc" level="DEBUG" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />

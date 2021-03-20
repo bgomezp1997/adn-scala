@@ -1,11 +1,11 @@
 package com.ceiba.filters
 
 import akka.stream.Materializer
-import play.api.mvc.Results.Forbidden
+import play.api.Logger
 import play.api.mvc._
-
+import play.api.libs.json.Json
 import javax.inject._
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 
 /**
  * This is a simple filter that adds a header to all requests. It's
@@ -18,21 +18,25 @@ import scala.concurrent.{ExecutionContext, Future}
  *             It is used below by the `map` method.
  */
 @Singleton
-class WebFilter @Inject()(implicit override val mat: Materializer, exec: ExecutionContext) extends Filter {
+class WebFilter @Inject() (implicit override val mat: Materializer, exec: ExecutionContext) extends Filter {
 
-  override def apply(nextFilter: RequestHeader => Future[Result])
-                    (requestHeader: RequestHeader): Future[Result] = {
-    // Run the next filter in the chain. This will call other filters
-    // and eventually call the action. Take the result and modify it
-    // by adding a new header.
-    requestHeader.headers
-      .get("tkn")
-      .getOrElse {
-        Future.successful(Forbidden("The request doesn't have the expected header"))
+  val logger: Logger = Logger(this.getClass())
+
+  override def apply(nextFilter: RequestHeader => Future[Result])(requestHeader: RequestHeader): Future[Result] = {
+    val startTime = System.currentTimeMillis
+    nextFilter(requestHeader).map { result =>
+      val responseTime: Long = System.currentTimeMillis - startTime
+      if (!requestHeader.path.contains("version")
+        && !requestHeader.path.contains("assets")
+        && !requestHeader.path.contains("swagger")) {
+        val record = LogRecord(requestHeader.path, result.header.status, responseTime)
+        logger.info(Json.toJson(record).toString())
+
+        result.withHeaders("Ms-Response-Time" -> responseTime.toString)
+      } else {
+        result
       }
-      nextFilter(requestHeader).map { result =>
-        result.withHeaders("X-ExampleFilter" -> "foo")
-      }
+    }
   }
 
 }

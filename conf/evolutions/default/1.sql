@@ -57,6 +57,21 @@ create table parameter
     primary key (id)
 );
 
-# --- !Downs
+insert into parameter(name, value, type) values('CANTIDAD_CITAS_DIA', '5', 'GENERAL');
+insert into parameter(name, value, type) values('DSCTO_ESTRATO_BAJO', '35', 'GENERAL');
+insert into parameter(name, value, type) values('DSCTO_ESTRATO_MEDIO', '20', 'GENERAL');
+insert into parameter(name, value, type) values('DSCTO_ESTRATO_ALTO', '10', 'GENERAL');
 
-drop table persona;
+insert into parameter(name, value, type) values('NAVIDAD', '2020-12-24', 'FESTIVO');
+insert into parameter(name, value, type) values('ANO_NUEVO', '2020-12-31', 'FESTIVO');
+
+
+insert into parameter(name, value, type) values('CORNEOLOGO', '190000', 'ESPECIALIDAD');
+insert into parameter(name, value, type) values('RETINOLOGO', '150000', 'ESPECIALIDAD');
+insert into parameter(name, value, type) values('GLAUCOMATOLOGO', '210000', 'ESPECIALIDAD');
+insert into parameter(name, value, type) values('OCULOPLASTICO', '230000', 'ESPECIALIDAD');
+insert into parameter(name, value, type) values('NO', '130000', 'ESPECIALIDAD');
+
+insert into eps(nit, name, phone, email) values('1', 'Sanitas', '7441111', 'sanitas@mail.com');
+
+# --- !Downs
